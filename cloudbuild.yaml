@@ -37,8 +37,10 @@ steps:
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
+      - '--port'
+      - '8080'
       - '--timeout'
-      - '600s'  
+      - '900s'  
 
   # Optional: Delete old Cloud Run revisions (if desired)
   - name: 'gcr.io/cloud-builders/gcloud'
