@@ -3,39 +3,6 @@
 *.pyo
 __pycache__/
 Tesseract-OCR/
+
 # Virtual environment
 venv/
-ENV/
-env/
-*.env
-
-# Distribution / packaging
-*.egg
-*.egg-info/
-dist/
-build/
-eggs/
-*.egg-info/
-
-# PyInstaller
-*.manifest
-*.spec
-
-# VS Code settings
-.vscode/
-
-# macOS system files
-.DS_Store
-
-# log files
-*.log
-
-
-# Jupyter Notebook checkpoints
-.ipynb_checkpoints
-
-# Pytest cache
-.cache
-
-# Other files to exclude (modify based on project)
-node_modules/
