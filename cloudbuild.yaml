@@ -23,7 +23,7 @@ steps:
     args:
       - "run"
       - "deploy"
-      - "deafult"  # Replace with your Cloud Run service name
+      - "jago-microservice"  # Replace with your Cloud Run service name
       - "--image"
       - "gcr.io/jago-dev/jago-microservice"  # Ensure the correct image name
       - "--region"
