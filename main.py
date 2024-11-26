@@ -9,6 +9,12 @@ from PIL import Image, ImageDraw, ImageFont
 import pytesseract
 import config
 
+import os
+
+port = int(os.environ.get("PORT", 8080))  
+app.run(host="0.0.0.0", port=port) 
+
+
 pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
 
 

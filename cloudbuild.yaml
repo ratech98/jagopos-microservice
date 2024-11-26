@@ -36,7 +36,9 @@ steps:
       - 'us-central1'  # Replace with your desired region
       - '--platform'
       - 'managed'
-      - '--allow-unauthenticated'  # Modify based on your needs for authentication
+      - '--allow-unauthenticated'
+      - '--timeout'
+      - '600s'  
 
   # Optional: Delete old Cloud Run revisions (if desired)
   - name: 'gcr.io/cloud-builders/gcloud'
