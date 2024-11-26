@@ -1,2 +1,43 @@
-venv
+# Python bytecode files
+*.pyc
+*.pyo
 __pycache__/
+
+# Virtual environment
+venv/
+ENV/
+env/
+*.env
+
+# Distribution / packaging
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg-info/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# VS Code settings
+.vscode/
+
+# macOS system files
+.DS_Store
+
+# log files
+*.log
+
+# Configuration files for sensitive data
+config.py  # Exclude this if it contains sensitive or environment-specific data
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Pytest cache
+.cache
+
+# Other files to exclude (modify based on project)
+node_modules/
