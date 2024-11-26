@@ -10,7 +10,14 @@ steps:
         pip install -r requirement.txt  # Ensure your requirements.txt is in the repo
 
   - name: "gcr.io/cloud-builders/gcloud"
-    args: ["app", "deploy", "app.yaml"]
+    args:
+      - "functions"
+      - "deploy"
+      - "my-function"  # Function name
+      - "--runtime"
+      - "python39"  # Runtime version
+      - "--trigger-http"  # HTTP trigger, or use other triggers like Pub/Sub or Cloud Storage
+      - "--allow-unauthenticated"  # Adjust for security if needed
 
   - name: "gcr.io/cloud-builders/gcloud"
     entrypoint: "bash"
