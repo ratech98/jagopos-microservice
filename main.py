@@ -1,9 +1,9 @@
-import cv2
 from PIL import Image, ImageDraw, ImageFont
 import pytesseract
 import os
 from flask import Flask, send_file, jsonify
 import config
+import cv2
 
 # Initialize the Flask app
 app = Flask(__name__)
