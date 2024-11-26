@@ -23,7 +23,7 @@ steps:
     args:
       - "run"
       - "deploy"
-      - "jago-microservice"  # Replace with your Cloud Run service name
+      - "default"  # Replace with your Cloud Run service name
       - "--image"
       - "gcr.io/jago-dev-2/jago-microservice"  # Ensure the correct image name
       - "--region"
@@ -39,7 +39,7 @@ steps:
       - "-c"
       - |
         revisions=$(gcloud run revisions list \
-          --service my-app \
+          --service default \
           --format 'value(METADATA.NAME)' \
           --sort-by '~METADATA.CREATION_TIMESTAMP')
         # Skip the most recent revision and delete others
