@@ -20,6 +20,7 @@ COPY Tesseract-OCR /app/Tesseract-OCR
 COPY images /app/images
 
 # Install Python dependencies
+RUN pip install --no-cache-dir numpy==1.26.0
 RUN pip install --no-cache-dir -r /app/requirement.txt
 
 # Expose the port for the Flask app
