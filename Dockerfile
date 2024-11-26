@@ -23,6 +23,7 @@ COPY images /app/images
 RUN pip install --no-cache-dir numpy==1.26.0
 RUN pip install --no-cache-dir -r /app/requirement.txt
 
+ENV TESSERACT_CMD="/usr/bin/tesseract"
 # Expose the port for the Flask app
 EXPOSE 8080
 

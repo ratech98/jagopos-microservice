@@ -9,8 +9,10 @@ print(cv2.__version__)
 app = Flask(__name__)
 
 # Set the path to Tesseract (ensure it's correctly configured for your environment)
-pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
+tesseract_cmd = os.getenv('TESSERACT_CMD', '/opt/homebrew/bin/tesseract')  
 
+# Set the tesseract command for pytesseract
+pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
 # File paths
 background_path = './images/2.jpg'
 blueprint_path = './images/3.jpg'
