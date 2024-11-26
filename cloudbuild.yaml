@@ -50,4 +50,4 @@ steps:
         done
 
 options:
-  logging: "CLOUD_LOGGING_AND_STDOUT"  # Enable detailed logs
+  logging: "CLOUD_LOGGING_ONLY"  # Use this valid logging option
