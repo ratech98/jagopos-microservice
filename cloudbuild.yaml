@@ -7,7 +7,7 @@ steps:
         python3 -m venv venv
         . venv/bin/activate
         pip install --upgrade pip
-        pip install -r requirements.txt  # Ensure your requirements.txt is in the repo
+        pip install -r requirement.txt  # Ensure your requirements.txt is in the repo
 
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy", "app.yaml"]
