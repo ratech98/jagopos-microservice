@@ -10,27 +10,33 @@ steps:
         pip install --upgrade pip
         pip install -r requirement.txt  # Ensure your requirements.txt is in the repo
 
-  # Step 2: Build the Docker image for Cloud Run
-  - name: 'gcr.io/cloud-builders/docker'
+- name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/jago-dev-2/jago-microservice'  # Replace with your image name
+      - 'gcr.io/jago-dev-2/jago-microservice'
       - '.'
 
-  # Step 3: Deploy the image to Cloud Run
-  - name: "gcr.io/cloud-builders/gcloud"
+  - name: 'gcr.io/cloud-builders/docker'
     args:
-      - "run"
-      - "deploy"
-      - "default"  # Replace with your Cloud Run service name
-      - "--image"
-      - "gcr.io/jago-dev-2/jago-microservice"  # Ensure the correct image name
-      - "--region"
-      - "us-central1"  # Replace with your preferred region
-      - "--platform"
-      - "managed"
-      - "--allow-unauthenticated"  # Adjust depending on your authentication preferences
+      - 'push'
+      - 'gcr.io/jago-dev-2/jago-microservice'
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'default'  # Replace with your service name
+      - '--image'
+      - 'gcr.io/jago-dev-2/jago-microservice'
+      - '--region'
+      - 'us-central1'  # Replace with your region
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+
+images:
+  - 'gcr.io/jago-dev-2/jago-microservice'
 
   # Optional: Delete old Cloud Run revisions (if desired)
   - name: "gcr.io/cloud-builders/gcloud"
