@@ -45,7 +45,7 @@ steps:
         # Skip the most recent revision and delete others
         for revision in $(echo "$revisions" | tail -n +2); do
           gcloud run revisions delete "$revision" \
-            --service my-app \
+            --service jago-microservice \
             --quiet
         done
 
