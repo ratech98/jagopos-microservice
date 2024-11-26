@@ -1,6 +1,6 @@
 steps:
   # Step 1: Create and activate virtual environment, install dependencies
-  - name: 'gcr.io/cloud-builders/python'
+  - name: 'python:3.9'
     entrypoint: 'bash'
     args:
       - '-c'
