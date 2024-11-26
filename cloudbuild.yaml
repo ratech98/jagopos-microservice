@@ -10,7 +10,7 @@ steps:
         pip install --upgrade pip
         pip install -r requirement.txt  # Ensure your requirements.txt is in the repo
 
-- name: 'gcr.io/cloud-builders/docker'
+  - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
       - '-t'
