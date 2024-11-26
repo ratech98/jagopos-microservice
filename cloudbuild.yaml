@@ -8,14 +8,14 @@ steps:
         python3 -m venv venv
         . venv/bin/activate
         pip install --upgrade pip
-        pip install -r requirements.txt  # Ensure your requirements.txt is in the repo
+        pip install -r requirement.txt  # Ensure your requirements.txt is in the repo
 
   # Step 2: Build the Docker image for Cloud Run
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/my-app-image'  # Replace with your image name
+      - 'gcr.io/jago-dev/jagopos-microservice'  # Replace with your image name
       - '.'
 
   # Step 3: Deploy the image to Cloud Run
@@ -23,9 +23,9 @@ steps:
     args:
       - "run"
       - "deploy"
-      - "my-app"  # Replace with your Cloud Run service name
+      - "jagopos-microservice"  # Replace with your Cloud Run service name
       - "--image"
-      - "gcr.io/$PROJECT_ID/my-app-image"  # Ensure the correct image name
+      - "gcr.io/jago-dev/jagopos-microservice"  # Ensure the correct image name
       - "--region"
       - "us-central1"  # Replace with your preferred region
       - "--platform"
