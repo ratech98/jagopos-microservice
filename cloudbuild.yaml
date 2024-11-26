@@ -1,0 +1,30 @@
+steps:
+  - name: 'gcr.io/cloud-builders/python'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        python3 -m venv venv
+        . venv/bin/activate
+        pip install --upgrade pip
+        pip install -r requirements.txt  # Ensure your requirements.txt is in the repo
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy", "app.yaml"]
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        # List and delete old App Engine versions (keeping the most recent)
+        versions=$(gcloud app versions list \
+          --service default \
+          --sort-by '~VERSION.ID' \
+          --format 'value(VERSION.ID)' | sed 1,5d)  # Skip the first 5 lines (adjust as needed)
+        for version in $versions; do
+          gcloud app versions delete "$version" \
+            --service default \
+            --quiet
+        done
+

@@ -30,8 +30,6 @@ eggs/
 # log files
 *.log
 
-# Configuration files for sensitive data
-config.py  # Exclude this if it contains sensitive or environment-specific data
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
