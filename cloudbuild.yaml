@@ -23,7 +23,7 @@ steps:
     args:
       - "run"
       - "deploy"
-      - "jago-microservice"  # Replace with your Cloud Run service name
+      - "deafult"  # Replace with your Cloud Run service name
       - "--image"
       - "gcr.io/jago-dev/jago-microservice"  # Ensure the correct image name
       - "--region"
@@ -45,7 +45,7 @@ steps:
         # Skip the most recent revision and delete others
         for revision in $(echo "$revisions" | tail -n +2); do
           gcloud run revisions delete "$revision" \
-            --service jago-microservice \
+            --service default \
             --quiet
         done
 
