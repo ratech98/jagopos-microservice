@@ -15,7 +15,7 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/jago-dev/jago-microservice'  # Replace with your image name
+      - 'gcr.io/jago-dev-2/jago-microservice'  # Replace with your image name
       - '.'
 
   # Step 3: Deploy the image to Cloud Run
@@ -25,7 +25,7 @@ steps:
       - "deploy"
       - "jago-microservice"  # Replace with your Cloud Run service name
       - "--image"
-      - "gcr.io/jago-dev/jago-microservice"  # Ensure the correct image name
+      - "gcr.io/jago-dev-2/jago-microservice"  # Ensure the correct image name
       - "--region"
       - "us-central1"  # Replace with your preferred region
       - "--platform"
