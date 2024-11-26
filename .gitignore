@@ -2,7 +2,7 @@
 *.pyc
 *.pyo
 __pycache__/
-
+Tesseract-OCR/
 # Virtual environment
 venv/
 ENV/
