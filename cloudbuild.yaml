@@ -10,39 +10,39 @@ steps:
         pip install --upgrade pip
         pip install -r requirement.txt  # Ensure your requirements.txt is in the repo
 
+  # Step 2: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
       - '-t'
       - 'gcr.io/jago-dev-2/jago-microservice'
-      - '.'
+      - '.'  # Current directory for Docker build context
 
+  # Step 3: Push the Docker image to Google Container Registry (GCR)
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
       - 'gcr.io/jago-dev-2/jago-microservice'
 
+  # Step 4: Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - 'run'
       - 'deploy'
-      - 'default'  # Replace with your service name
+      - 'default'  # Replace with your Cloud Run service name
       - '--image'
-      - 'gcr.io/jago-dev-2/jago-microservice'
+      - 'gcr.io/jago-dev-2/jago-microservice'  # Ensure the image is correct
       - '--region'
-      - 'us-central1'  # Replace with your region
+      - 'us-central1'  # Replace with your desired region
       - '--platform'
       - 'managed'
-      - '--allow-unauthenticated'
-
-images:
-  - 'gcr.io/jago-dev-2/jago-microservice'
+      - '--allow-unauthenticated'  # Modify based on your needs for authentication
 
   # Optional: Delete old Cloud Run revisions (if desired)
-  - name: "gcr.io/cloud-builders/gcloud"
-    entrypoint: "bash"
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
     args:
-      - "-c"
+      - '-c'
       - |
         revisions=$(gcloud run revisions list \
           --service default \
@@ -55,5 +55,8 @@ images:
             --quiet
         done
 
+images:
+  - 'gcr.io/jago-dev-2/jago-microservice'  # Ensure the image name is correct
+
 options:
-  logging: "CLOUD_LOGGING_ONLY"  # Use this valid logging option
+  logging: 'CLOUD_LOGGING_ONLY'  # Use this valid logging option
