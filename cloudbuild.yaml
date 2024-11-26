@@ -1,5 +1,5 @@
 steps:
-  - name: 'python:3.9'
+  - name: 'gcr.io/cloud-builders/python'
     entrypoint: 'bash'
     args:
       - '-c'
@@ -7,33 +7,43 @@ steps:
         python3 -m venv venv
         . venv/bin/activate
         pip install --upgrade pip
-        pip install -r requirement.txt  # Ensure your requirements.txt is in the repo
+        pip install -r requirement.txt  
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/jago-dev/jagopos-microservice'  
+      - '.'
 
   - name: "gcr.io/cloud-builders/gcloud"
     args:
-      - "functions"
+      - "run"
       - "deploy"
-      - "my-function"  # Function name
-      - "--runtime"
-      - "python39"  # Runtime version
-      - "--trigger-http"  # HTTP trigger, or use other triggers like Pub/Sub or Cloud Storage
-      - "--allow-unauthenticated"  # Adjust for security if needed
+      - "jagopos-microservice"  
+      - "--image"
+      - "gcr.io/jago-dev/jagopos-microservice" 
+      - "--region"
+      - "us-central1"  =
+      - "--platform"
+      - "managed"
+      - "--allow-unauthenticated"  
 
   - name: "gcr.io/cloud-builders/gcloud"
     entrypoint: "bash"
     args:
       - "-c"
       - |
-        # List and delete old App Engine versions (keeping the most recent)
-        versions=$(gcloud app versions list \
-          --service default \
-          --sort-by '~VERSION.ID' \
-          --format 'value(VERSION.ID)' | sed 1,5d)  # Skip the first 5 lines (adjust as needed)
-        for version in $versions; do
-          gcloud app versions delete "$version" \
-            --service default \
+        revisions=$(gcloud run revisions list \
+          --service my-app \
+          --format 'value(METADATA.NAME)' \
+          --sort-by '~METADATA.CREATION_TIMESTAMP')
+        # Skip the most recent revision and delete others
+        for revision in $(echo "$revisions" | tail -n +2); do
+          gcloud run revisions delete "$revision" \
+            --service my-app \
             --quiet
         done
 
 options:
-  logging: "CLOUD_LOGGING_ONLY"
+  logging: "CLOUD_LOGGING_AND_STDOUT"  
